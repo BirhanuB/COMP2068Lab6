@@ -1,0 +1,15 @@
+//extends layout
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/main.css')
+  body
+    nav
+        h2
+            a(href='/users') Users 
+            | | 
+            a(href='/logout') Logout
+    block content
+    h1 Successfully logged in
+    
