@@ -13,19 +13,22 @@ router.get('/users', function (req, res) {
 module.exports = router;
 
 */
-router.get('/users', function (req, res) {
-    userModel.find({}, function (err, users) {
-        if (err) {
-            res.send('Error');
-        }
-        else if (users.length) {
-            console.log(users);
-            res.json(users);
-        }
-        else {
-            res.send('No users found');
-        }
-    });
+router.get('/', function (req, res) {
+    if (req.isAuthenticated()) {
+        userModel.find({}, function (err, users) {
+            if (err) {
+                res.send('Error');
+            }
+            else if (users.length) {
+                res.render('users', { users: users, user: req.user });
+            }
+            else {
+                res.send('No users found');
+            }
+        });
+    } else {
+        res.redirect('/login');   
+    }
 });
 
 module.exports = router;
